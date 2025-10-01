@@ -102,6 +102,8 @@ section:nth-of-type(even) {
   cursor: pointer;
   font-weight: 600;
   transition: background var(--transition-fast);
+  /* Prevent Arabic tab labels from being truncated on small screens */
+  white-space: nowrap;
 }
 
 .tabs button.active {
@@ -257,6 +259,14 @@ footer a {
 
 footer a:hover {
   text-decoration: underline;
+}
+
+/* Responsive tweaks for tab buttons on narrow screens */
+@media (max-width: 600px) {
+  .tabs button {
+    flex: 1 1 45%;
+    text-align: center;
+  }
 }
 
 @media (min-width: 768px) {
