@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<!--
+  Imzad Landing Page
+
+  This single page presents the value proposition of the Imzad mobile
+  application to Algerian shoppers and travellers. It follows the
+  information architecture outlined in the provided brief, supports
+  Arabic (RTL), French and English, and uses a minimal design with
+  blue accents reminiscent of the app’s UI. Use the language
+  selector in the top right to toggle between translations.
+-->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Imzad — Travelers meet real shopper requests</title>
+    <meta
+      name="description"
+      content="Marketplace connecting travelers and shoppers around real requests, clear prices, and direct chat. Android now; iOS coming soon."
+    />
+    <meta
+      name="keywords"
+      content="traveler delivery, shopper requests, micro‑importation, airport meet‑up, Algeria, MENA"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Hero Section -->
+    <header>
+      <nav class="language-switcher">
+        <button data-lang="ar">AR</button>
+        <button data-lang="fr">FR</button>
+        <button data-lang="en">EN</button>
+      </nav>
+      <h1>
+        <span data-lang="ar">إمزاد — اشترِ بذكاء… وسافر بربح</span>
+        <span data-lang="fr">Imzad — Achetez futé… Voyagez rentable</span>
+        <span data-lang="en">Imzad — Shop smarter… Travel profitably</span>
+      </h1>
+      <p>
+        <span data-lang="ar"
+          >منصة تربط بين المسافرين والمشترين، بطلبات حقيقية، أسعار واضحة، وتواصل
+          مباشر.</span
+        >
+        <span data-lang="fr"
+          >Mise en relation entre voyageurs et acheteurs : demandes réelles,
+          prix clairs, discussion directe.</span
+        >
+        <span data-lang="en"
+          >We match travelers and shoppers around real requests, clear pricing
+          and direct chat.</span
+        >
+      </p>
+      <div class="download-buttons">
+        <a href="#" id="android-link">
+          <span data-lang="ar">حمّل التطبيق على أندرويد</span>
+          <span data-lang="fr">Télécharger sur Android</span>
+          <span data-lang="en">Get it on Android</span>
+        </a>
+        <a href="#" class="disabled">
+          <span data-lang="ar">iOS قريبًا</span>
+          <span data-lang="fr">iOS bientôt</span>
+          <span data-lang="en">iOS coming soon</span>
+        </a>
+      </div>
+      <p style="margin-top:1.5rem;font-size:0.875rem;font-weight:500;">
+        <span data-lang="ar"
+          >إمزاد وسيط ربط فقط — الاتفاقات والدفع بين المستخدمين مباشرة مع
+          احترام القوانين والجمارك.</span
+        >
+        <span data-lang="fr"
+          >Imzad est une plateforme d’intermédiation — accords et paiements
+          gérés entre utilisateurs, dans le respect de la loi et de la douane.</span
+        >
+        <span data-lang="en"
+          >Imzad is a matching platform only — users handle agreements and
+          payments, complying with local law and customs.</span
+        >
+      </p>
+    </header>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works">
+      <h2 style="text-align:center;">
+        <span data-lang="ar">كيف تعمل؟</span>
+        <span data-lang="fr">Comment ça marche ?</span>
+        <span data-lang="en">How it works</span>
+      </h2>
+      <!-- Shopper / Traveler Tabs (one per language) -->
+      <!-- Arabic tabs -->
+      <div class="tabs" data-lang="ar">
+        <button data-target="ar-shopper">المشتري</button>
+        <button data-target="ar-traveler">المسافر</button>
+      </div>
+      <div id="ar-shopper" class="tab-content" data-lang="ar">
+        <ol>
+          <li>أنشئ طلبك (المقاس، السعر، مكان اللقاء).</li>
+          <li>استقبل عروضًا من مسافرين موثوقين.</li>
+          <li>اتفق وقابل المسافر لإتمام التسليم.</li>
+        </ol>
+      </div>
+      <div id="ar-traveler" class="tab-content" data-lang="ar">
+        <ol>
+          <li>اختر مسارك.</li>
+          <li>قدّم عروضًا على الطلبات المناسبة.</li>
+          <li>قابل وسلّم واربح بشكل قانوني.</li>
+        </ol>
+      </div>
+      <!-- French tabs -->
+      <div class="tabs" data-lang="fr">
+        <button data-target="fr-shopper">Acheteur</button>
+        <button data-target="fr-traveler">Voyageur</button>
+      </div>
+      <div id="fr-shopper" class="tab-content" data-lang="fr">
+        <ol>
+          <li>Créez votre demande (taille, budget, point de rencontre).</li>
+          <li>Recevez des offres de voyageurs.</li>
+          <li>Concluez et rencontrez pour la remise.</li>
+        </ol>
+      </div>
+      <div id="fr-traveler" class="tab-content" data-lang="fr">
+        <ol>
+          <li>Choisissez votre trajet.</li>
+          <li>Proposez des offres sur les demandes pertinentes.</li>
+          <li>Rencontrez et livrez — gains déclarés selon la loi.</li>
+        </ol>
+      </div>
+      <!-- English tabs -->
+      <div class="tabs" data-lang="en">
+        <button data-target="en-shopper">Shopper</button>
+        <button data-target="en-traveler">Traveler</button>
+      </div>
+      <div id="en-shopper" class="tab-content" data-lang="en">
+        <ol>
+          <li>Create your request (size, budget, meeting point).</li>
+          <li>Receive offers from trusted travellers.</li>
+          <li>Agree & meet for hand‑off.</li>
+        </ol>
+      </div>
+      <div id="en-traveler" class="tab-content" data-lang="en">
+        <ol>
+          <li>Pick your route.</li>
+          <li>Make offers on suitable requests.</li>
+          <li>Meet & deliver — earn legally.</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Key Features Section -->
+    <section id="features">
+      <h2 style="text-align:center;">
+        <span data-lang="ar">ميزات رئيسية</span>
+        <span data-lang="fr">Fonctionnalités clés</span>
+        <span data-lang="en">Key features</span>
+      </h2>
+      <div class="features">
+        <div class="feature-item">
+          <h3>
+            <span data-lang="ar">طلبات حقيقية وأسعار واضحة</span>
+            <span data-lang="fr">Demandes réelles & prix clairs</span>
+            <span data-lang="en">Real requests & clear pricing</span>
+          </h3>
+          <p>
+            <span data-lang="ar">شاهد طلبات حقيقية منشورة من مشترين جزائريين مع ميزانية محددة.</span>
+            <span data-lang="fr">Consultez des demandes authentiques avec des budgets précis.</span>
+            <span data-lang="en">Browse authentic requests with transparent budgets.</span>
+          </p>
+        </div>
+        <div class="feature-item">
+          <h3>
+            <span data-lang="ar">مطابقة حسب المسار</span>
+            <span data-lang="fr">Correspondance par trajet</span>
+            <span data-lang="en">Route‑based matching</span>
+          </h3>
+          <p>
+            <span data-lang="ar">ربط الطلبات بالرحلات الفعلية للمسافرين.</span>
+            <span data-lang="fr">Nous associons les demandes aux itinéraires réels des voyageurs.</span>
+            <span data-lang="en">Requests are matched to travellers’ real travel routes.</span>
+          </p>
+        </div>
+        <div class="feature-item">
+          <h3>
+            <span data-lang="ar">مراسلة وإدارة العروض</span>
+            <span data-lang="fr">Messagerie & gestion des offres</span>
+            <span data-lang="en">In‑app chat & offer management</span>
+          </h3>
+          <p>
+            <span data-lang="ar">تواصل مباشرة مع الأطراف الأخرى وتابع عروضك بسهولة.</span>
+            <span data-lang="fr">Discutez directement et gérez vos offres en toute simplicité.</span>
+            <span data-lang="en">Chat directly and manage offers seamlessly.</span>
+          </p>
+        </div>
+        <div class="feature-item">
+          <h3>
+            <span data-lang="ar">تقييمات ومراجعات</span>
+            <span data-lang="fr">Notes & avis</span>
+            <span data-lang="en">Ratings & reviews</span>
+          </h3>
+          <p>
+            <span data-lang="ar">ابنِ سمعتك من خلال تقييمات المستخدمين وآرائهم.</span>
+            <span data-lang="fr">Construisez votre réputation grâce aux évaluations.</span>
+            <span data-lang="en">Build your reputation with user ratings and reviews.</span>
+          </p>
+        </div>
+        <div class="feature-item">
+          <h3>
+            <span data-lang="ar">واجهة متعددة اللغات</span>
+            <span data-lang="fr">Interface multilingue</span>
+            <span data-lang="en">Multilingual interface</span>
+          </h3>
+          <p>
+            <span data-lang="ar">التطبيق يدعم العربية، الفرنسية والإنجليزية.</span>
+            <span data-lang="fr">L’application supporte l’arabe, le français et l’anglais.</span>
+            <span data-lang="en">The app supports Arabic, French and English.</span>
+          </p>
+        </div>
+        <div class="feature-item">
+          <h3>
+            <span data-lang="ar">امتثال للقانون</span>
+            <span data-lang="fr">Conformité légale</span>
+            <span data-lang="en">Legal compliance</span>
+          </h3>
+          <p>
+            <span data-lang="ar">احترم قوانين الاستيراد المصغر والجمركة الجزائرية.</span>
+            <span data-lang="fr">Respectez la loi algérienne sur la micro‑importation et la douane.</span>
+            <span data-lang="en">Follow Algeria’s micro‑importation and customs rules.</span>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Trust & Safety Section -->
+    <section id="trust">
+      <h2 style="text-align:center;">
+        <span data-lang="ar">الثقة والسلامة</span>
+        <span data-lang="fr">Confiance & sécurité</span>
+        <span data-lang="en">Trust & Safety</span>
+      </h2>
+      <p style="max-width:900px;margin:0 auto;">
+        <span data-lang="ar"
+          >إمزاد هو وسيط فقط — لا يوفر خدمات شحن أو دفع. الاتفاقات والتسديدات تتم
+          بين المستخدمين مباشرة. تأكد من احترام القانون الجزائري للاتجار
+          المصغّر، وتجنب السلع المحظورة. التزم بمقابلات في أماكن عامة وكن حذرًا.
+          نذكرك بأنك مسؤول عن أي رسوم جمركية أو ضرائب.</span
+        >
+        <span data-lang="fr"
+          >Imzad est une plateforme d’intermédiation : nous ne proposons ni
+          transport ni paiement. Les accords et règlements sont conclus
+          directement entre utilisateurs. Respectez la loi algérienne de
+          micro‑importation et évitez les articles interdits. Organisez vos
+          rencontres dans des lieux publics et soyez vigilants. Vous êtes
+          responsables des droits de douane ou taxes éventuels.</span
+        >
+        <span data-lang="en"
+          >Imzad acts only as an intermediary — we do not provide shipping or
+          payment services. Agreements and settlements are arranged directly
+          between users. Please respect Algeria’s micro‑importation law and avoid
+          prohibited items. Meet in public places and exercise caution. You are
+          responsible for any customs duties or taxes.</span
+        >
+      </p>
+    </section>
+
+    <!-- Screenshots Section -->
+    <section id="screenshots">
+      <h2 style="text-align:center;">
+        <span data-lang="ar">صور من التطبيق</span>
+        <span data-lang="fr">Captures d’écran</span>
+        <span data-lang="en">Screenshots</span>
+      </h2>
+      <div class="screenshots">
+        <img src="images/home1.jpg" alt="Imzad Home – cards" />
+        <img src="images/home2.jpg" alt="Imzad Home – feature banner" />
+        <img src="images/trip.jpg" alt="Add trip form" />
+        <img src="images/request.jpg" alt="Create request form" />
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq">
+      <h2 style="text-align:center;">
+        <span data-lang="ar">الأسئلة الشائعة</span>
+        <span data-lang="fr">FAQ</span>
+        <span data-lang="en">FAQ</span>
+      </h2>
+      <!-- Each FAQ item contains copies for all languages -->
+      <!-- FAQ 1 -->
+      <div class="faq-item" data-lang="ar fr en">
+        <div class="faq-question">
+          <span data-lang="ar">هل توفر إمزاد الدفع أو الشحن؟</span>
+          <span data-lang="fr">Imzad fournit‑elle le paiement ou la livraison ?</span>
+          <span data-lang="en">Does Imzad provide payment or shipping?</span>
+        </div>
+        <div class="faq-answer">
+          <p>
+            <span data-lang="ar">حاليًا لا. الاتفاق والدفع يتمان بين المستخدمين مباشرة.</span>
+            <span data-lang="fr">Pas pour le moment. Les accords et paiements sont conclus directement entre utilisateurs.</span>
+            <span data-lang="en">Not at this time. Agreements and payments are settled directly between users.</span>
+          </p>
+        </div>
+      </div>
+      <!-- FAQ 2 -->
+      <div class="faq-item" data-lang="ar fr en">
+        <div class="faq-question">
+          <span data-lang="ar">ما هي المواد الممنوعة؟</span>
+          <span data-lang="fr">Quels articles sont interdits ?</span>
+          <span data-lang="en">Which items are prohibited?</span>
+        </div>
+        <div class="faq-answer">
+          <p>
+            <span data-lang="ar">أي مادة محظورة بموجب القانون أو الجمارك، مثل الأسلحة، المخدرات، البضائع المقلدة، الأدوية الموصوفة، أو كميات تتجاوز الحدود.</span>
+            <span data-lang="fr">Tout article prohibé par la loi ou la douane, notamment armes, drogues, contrefaçons, médicaments soumis à ordonnance ou quantités dépassant les seuils.</span>
+            <span data-lang="en">Any item banned by law or customs — weapons, drugs, counterfeit goods, prescription medicines or quantities exceeding legal limits.</span>
+          </p>
+        </div>
+      </div>
+      <!-- FAQ 3 -->
+      <div class="faq-item" data-lang="ar fr en">
+        <div class="faq-question">
+          <span data-lang="ar">هل إمزاد مسؤولة عن الخسائر؟</span>
+          <span data-lang="fr">Imzad est‑elle responsable des pertes ?</span>
+          <span data-lang="en">Is Imzad responsible for losses?</span>
+        </div>
+        <div class="faq-answer">
+          <p>
+            <span data-lang="ar">إمزاد وسيط ولا تتحمل المسؤولية عن الاتفاقات بين المستخدمين. كن دائمًا حذرًا وراجع من تتعامل معه.</span>
+            <span data-lang="fr">Imzad est un intermédiaire et n’est pas responsable des accords conclus entre utilisateurs. Restez vigilant et choisissez vos partenaires avec soin.</span>
+            <span data-lang="en">Imzad is an intermediary and not responsible for agreements between users. Always exercise caution and vet who you deal with.</span>
+          </p>
+        </div>
+      </div>
+      <!-- FAQ 4 -->
+      <div class="faq-item" data-lang="ar fr en">
+        <div class="faq-question">
+          <span data-lang="ar">كيف أبني سمعتي في التطبيق؟</span>
+          <span data-lang="fr">Comment bâtir ma réputation ?</span>
+          <span data-lang="en">How do I build my reputation?</span>
+        </div>
+        <div class="faq-answer">
+          <p>
+            <span data-lang="ar">التزم بالتواصل الواضح، التسليم في الوقت، واحترام الاتفاقات لتحصل على تقييمات جيدة.</span>
+            <span data-lang="fr">Communiquez clairement, respectez les délais de livraison et honorez vos accords pour obtenir de bonnes évaluations.</span>
+            <span data-lang="en">Communicate clearly, deliver on time and honour agreements to earn good ratings.</span>
+          </p>
+        </div>
+      </div>
+      <!-- FAQ 5 -->
+      <div class="faq-item" data-lang="ar fr en">
+        <div class="faq-question">
+          <span data-lang="ar">هل يمكنني استخدام المنصة بشكل مهني؟</span>
+          <span data-lang="fr">Puis‑je utiliser la plateforme de manière professionnelle ?</span>
+          <span data-lang="en">Can I use the platform professionally?</span>
+        </div>
+        <div class="faq-answer">
+          <p>
+            <span data-lang="ar">نعم، طالما تحترم القوانين والضرائب وحدود الاستيراد المصغر.</span>
+            <span data-lang="fr">Oui, tant que vous respectez la loi, les taxes et les limites de la micro‑importation.</span>
+            <span data-lang="en">Yes, as long as you respect the law, taxes and micro‑importation limits.</span>
+          </p>
+        </div>
+      </div>
+      <!-- FAQ 6 -->
+      <div class="faq-item" data-lang="ar fr en">
+        <div class="faq-question">
+          <span data-lang="ar">ماذا عن iOS؟</span>
+          <span data-lang="fr">Qu’en est‑il d’iOS ?</span>
+          <span data-lang="en">What about iOS?</span>
+        </div>
+        <div class="faq-answer">
+          <p>
+            <span data-lang="ar">نسخة iOS قيد التطوير وستتوفر قريبًا. التطبيق متاح حاليًا على أندرويد.</span>
+            <span data-lang="fr">La version iOS est en cours de développement et sera disponible bientôt. L’application est actuellement sur Android.</span>
+            <span data-lang="en">The iOS version is under development and will be available soon. The app is currently on Android.</span>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Download Section (repeated call to action) -->
+    <section id="download">
+      <h2 style="text-align:center;">
+        <span data-lang="ar">احصل على إمزاد الآن</span>
+        <span data-lang="fr">Téléchargez Imzad maintenant</span>
+        <span data-lang="en">Get Imzad now</span>
+      </h2>
+      <div class="download-buttons">
+        <a href="#">
+          <span data-lang="ar">حمّل التطبيق على أندرويد</span>
+          <span data-lang="fr">Télécharger sur Android</span>
+          <span data-lang="en">Get it on Android</span>
+        </a>
+        <a href="#" class="disabled">
+          <span data-lang="ar">iOS قريبًا</span>
+          <span data-lang="fr">iOS bientôt</span>
+          <span data-lang="en">iOS coming soon</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div>
+        <a href="terms.html">
+          <span data-lang="ar">شروط الاستخدام</span>
+          <span data-lang="fr">Conditions d’utilisation</span>
+          <span data-lang="en">Terms of Service</span>
+        </a>
+        |
+        <a href="privacy.html">
+          <span data-lang="ar">سياسة الخصوصية</span>
+          <span data-lang="fr">Politique de confidentialité</span>
+          <span data-lang="en">Privacy Policy</span>
+        </a>
+        |
+        <a href="mailto:support@imzad.dz">
+          <span data-lang="ar">اتصل بنا</span>
+          <span data-lang="fr">Contact</span>
+          <span data-lang="en">Contact</span>
+        </a>
+      </div>
+      <div style="margin-top:0.5rem;">
+        © 2025 Imzad. All rights reserved.
+      </div>
+    </footer>
+    <script src="script.js"></script>
+  </body>
+</html>
