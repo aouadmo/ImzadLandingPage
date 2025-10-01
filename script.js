@@ -20,8 +20,15 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   function setLanguage(lang) {
+    // Iterate over all elements with data-lang attribute and show/hide
     document.querySelectorAll('[data-lang]').forEach(el => {
-      el.style.display = el.getAttribute('data-lang') === lang ? '' : 'none';
+      // Do not hide language switcher buttons themselves
+      if (el.closest('nav.language-switcher')) {
+        el.style.display = '';
+        return;
+      }
+      const langs = el.getAttribute('data-lang').split(/\s+/);
+      el.style.display = langs.includes(lang) ? '' : 'none';
     });
     // Set dir attribute on html for RTL when Arabic is selected
     if (lang === 'ar') {
@@ -31,9 +38,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // default to English
-  setLanguage('en');
-  document.querySelector('nav.language-switcher button[data-lang="en"]').classList.add('active');
+  // default to Arabic so Arabic content appears when the page loads
+  setLanguage('ar');
+  document.querySelector('nav.language-switcher button[data-lang="ar"]').classList.add('active');
 
   // Tabs for how it works section
   const tabContainers = document.querySelectorAll('.tabs');
