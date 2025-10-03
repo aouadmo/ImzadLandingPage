@@ -23,15 +23,202 @@
       name="keywords"
       content="traveler delivery, shopper requests, micro‑importation, airport meet‑up, Algeria, MENA"
     />
+
+    <!-- Performance optimizations -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+
+    <!-- Critical CSS -->
     <link rel="stylesheet" href="style.css" />
+
+    <!-- Preload critical images -->
+    <link rel="preload" as="image" href="images/home1.jpg" />
   </head>
   <body>
     <!-- Hero Section -->
+    <!-- iOS Waitlist Modal -->
+    <div id="waitlist-modal" class="waitlist-modal" role="dialog" aria-labelledby="waitlist-title" aria-describedby="waitlist-description" aria-hidden="true">
+      <div class="waitlist-modal-backdrop" aria-hidden="true"></div>
+      <div class="waitlist-modal-container">
+        <div class="waitlist-modal-content">
+          <button class="waitlist-modal-close" aria-label="Close waitlist modal" type="button">
+            <span aria-hidden="true">&times;</span>
+          </button>
+
+          <div class="waitlist-modal-header">
+            <h2 id="waitlist-title" class="waitlist-modal-title">
+              <span data-lang="en">🎉 Be First to Know!</span>
+              <span data-lang="fr">🎉 Soyez les premiers informés !</span>
+              <span data-lang="ar">🎉 كن أول من يعلم!</span>
+            </h2>
+            <p id="waitlist-description" class="waitlist-modal-subtitle">
+              <span data-lang="en">Join <span class="waitlist-counter">2,847</span> users waiting for iOS launch. Get notified first!</span>
+              <span data-lang="fr">Rejoignez <span class="waitlist-counter">2,847</span> utilisateurs en attente du lancement iOS.</span>
+              <span data-lang="ar">انضم إلى <span class="waitlist-counter">2,847</span> مستخدم ينتظرون إطلاق iOS!</span>
+            </p>
+          </div>
+
+          <form id="waitlist-form" class="waitlist-form" novalidate>
+            <div class="waitlist-contact-method">
+              <div class="waitlist-form-group" id="email-group">
+                <label for="waitlist-email" class="waitlist-form-label">
+                  <span data-lang="en">Email Address</span>
+                  <span data-lang="fr">Adresse e-mail</span>
+                  <span data-lang="ar">عنوان البريد الإلكتروني</span>
+                </label>
+                <input
+                  type="email"
+                  id="waitlist-email"
+                  name="email"
+                  class="waitlist-form-input"
+                  autocomplete="email"
+                  aria-describedby="email-error"
+                  placeholder="your@email.com"
+                >
+                <div class="waitlist-form-error" id="email-error" role="alert" aria-live="polite"></div>
+              </div>
+
+              <div class="waitlist-contact-divider">
+                <span class="waitlist-divider-text">
+                  <span data-lang="en">or</span>
+                  <span data-lang="fr">ou</span>
+                  <span data-lang="ar">أو</span>
+                </span>
+              </div>
+
+              <div class="waitlist-form-group" id="phone-group" style="display: none;">
+                <label for="waitlist-phone" class="waitlist-form-label">
+                  <span data-lang="en">Phone Number (WhatsApp)</span>
+                  <span data-lang="fr">Numéro de téléphone (WhatsApp)</span>
+                  <span data-lang="ar">رقم الهاتف (واتساب)</span>
+                </label>
+                <input
+                  type="tel"
+                  id="waitlist-phone"
+                  name="phone"
+                  class="waitlist-form-input"
+                  autocomplete="tel"
+                  aria-describedby="phone-error"
+                  placeholder="+213 XXX XXX XXX"
+                >
+                <div class="waitlist-form-error" id="phone-error" role="alert" aria-live="polite"></div>
+              </div>
+
+              <button type="button" class="waitlist-contact-toggle" id="contact-toggle">
+                <span data-lang="en">💬 Prefer WhatsApp? Use phone number instead</span>
+                <span data-lang="fr">💬 Préférez WhatsApp ? Utilisez votre numéro</span>
+                <span data-lang="ar">💬 تفضل واتساب؟ استخدم رقم الهاتف</span>
+              </button>
+            </div>
+
+            <div class="waitlist-form-group">
+              <label for="waitlist-name" class="waitlist-form-label">
+                <span data-lang="en">First Name</span>
+                <span data-lang="fr">Prénom</span>
+                <span data-lang="ar">الاسم الأول</span>
+              </label>
+              <input
+                type="text"
+                id="waitlist-name"
+                name="firstName"
+                class="waitlist-form-input"
+                required
+                autocomplete="given-name"
+                aria-describedby="name-error"
+              >
+              <div class="waitlist-form-error" id="name-error" role="alert" aria-live="polite"></div>
+            </div>
+
+            <div class="waitlist-form-group">
+              <label for="waitlist-type" class="waitlist-form-label">
+                <span data-lang="en">I'm interested as a:</span>
+                <span data-lang="fr">Je suis intéressé(e) en tant que :</span>
+                <span data-lang="ar">أنا مهتم كـ:</span>
+              </label>
+              <select id="waitlist-type" name="userType" class="waitlist-form-select">
+                <option value="">
+                  <span data-lang="en">Select an option</span>
+                  <span data-lang="fr">Sélectionnez une option</span>
+                  <span data-lang="ar">اختر خياراً</span>
+                </option>
+                <option value="shopper">
+                  <span data-lang="en">Shopper</span>
+                  <span data-lang="fr">Acheteur</span>
+                  <span data-lang="ar">مشتري</span>
+                </option>
+                <option value="traveler">
+                  <span data-lang="en">Traveler</span>
+                  <span data-lang="fr">Voyageur</span>
+                  <span data-lang="ar">مسافر</span>
+                </option>
+                <option value="both">
+                  <span data-lang="en">Both</span>
+                  <span data-lang="fr">Les deux</span>
+                  <span data-lang="ar">كلاهما</span>
+                </option>
+              </select>
+            </div>
+
+            <button type="submit" class="waitlist-form-submit" id="waitlist-submit">
+              <span class="waitlist-submit-text">
+                <span data-lang="en">Join the Waitlist</span>
+                <span data-lang="fr">Rejoindre la liste d'attente</span>
+                <span data-lang="ar">انضم إلى قائمة الانتظار</span>
+              </span>
+              <span class="waitlist-submit-loading" aria-hidden="true">
+                <span data-lang="en">Joining...</span>
+                <span data-lang="fr">Inscription...</span>
+                <span data-lang="ar">جاري الانضمام...</span>
+              </span>
+            </button>
+
+            <div class="waitlist-form-privacy">
+              <span data-lang="en">🔒 We respect your privacy. Unsubscribe anytime.</span>
+              <span data-lang="fr">🔒 Nous respectons votre vie privée. Désabonnement à tout moment.</span>
+              <span data-lang="ar">🔒 نحترم خصوصيتك. إلغاء الاشتراك في أي وقت.</span>
+            </div>
+          </form>
+
+          <div id="waitlist-success" class="waitlist-success" style="display: none;">
+            <div class="waitlist-success-icon">🎉</div>
+            <h3 class="waitlist-success-title">
+              <span data-lang="en">You're in!</span>
+              <span data-lang="fr">C'est fait !</span>
+              <span data-lang="ar">تم!</span>
+            </h3>
+            <p class="waitlist-success-message">
+              <span data-lang="en">We'll notify you first when iOS launches. Check your email for confirmation!</span>
+              <span data-lang="fr">Nous vous préviendrons en premier lors du lancement iOS. Vérifiez votre e-mail !</span>
+              <span data-lang="ar">سنخبرك أولاً عند إطلاق iOS. تحقق من بريدك الإلكتروني!</span>
+            </p>
+            <div class="waitlist-success-social">
+              <p class="waitlist-success-share-text">
+                <span data-lang="en">Help us spread the word:</span>
+                <span data-lang="fr">Aidez-nous à faire passer le mot :</span>
+                <span data-lang="ar">ساعدنا في نشر الخبر:</span>
+              </p>
+              <div class="waitlist-success-share-buttons">
+                <button class="waitlist-share-btn" data-platform="twitter" aria-label="Share on Twitter">
+                  <span>🐦</span>
+                </button>
+                <button class="waitlist-share-btn" data-platform="facebook" aria-label="Share on Facebook">
+                  <span>📘</span>
+                </button>
+                <button class="waitlist-share-btn" data-platform="whatsapp" aria-label="Share on WhatsApp">
+                  <span>💬</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <header>
-      <nav class="language-switcher">
-        <button data-lang="ar">AR</button>
-        <button data-lang="fr">FR</button>
-        <button data-lang="en">EN</button>
+      <nav class="language-switcher" role="navigation" aria-label="Language selection">
+        <button data-lang="ar" aria-label="Switch to Arabic language" aria-pressed="false">AR</button>
+        <button data-lang="fr" aria-label="Switch to French language" aria-pressed="false">FR</button>
+        <button data-lang="en" aria-label="Switch to English language" aria-pressed="false">EN</button>
       </nav>
       <h1>
         <span data-lang="ar">إمزاد — اشترِ بذكاء… وسافر بربح</span>
@@ -53,16 +240,16 @@
         >
       </p>
       <div class="download-buttons">
-        <a href="#" id="android-link">
+        <a href="#" id="android-link" aria-label="Download Imzad app for Android (coming soon)" role="button">
           <span data-lang="ar">حمّل التطبيق على أندرويد</span>
           <span data-lang="fr">Télécharger sur Android</span>
           <span data-lang="en">Get it on Android</span>
         </a>
-        <a href="#" class="disabled">
-          <span data-lang="ar">iOS قريبًا</span>
-          <span data-lang="fr">iOS bientôt</span>
-          <span data-lang="en">iOS coming soon</span>
-        </a>
+        <button class="ios-waitlist-button" aria-label="Join iOS waitlist" type="button">
+          <span data-lang="ar">قائمة انتظار iOS</span>
+          <span data-lang="fr">Liste d'attente iOS</span>
+          <span data-lang="en">Join iOS Waitlist</span>
+        </button>
       </div>
       <p style="margin-top:1.5rem;font-size:0.875rem;font-weight:500;">
         <span data-lang="ar"
@@ -89,18 +276,18 @@
       </h2>
       <!-- Shopper / Traveler Tabs (one per language) -->
       <!-- Arabic tabs -->
-      <div class="tabs" data-lang="ar">
-        <button data-target="ar-shopper">المشتري</button>
-        <button data-target="ar-traveler">المسافر</button>
+      <div class="tabs" data-lang="ar" role="tablist" aria-label="How it works for different user types">
+        <button data-target="ar-shopper" role="tab" aria-controls="ar-shopper" aria-selected="false" tabindex="-1">المشتري</button>
+        <button data-target="ar-traveler" role="tab" aria-controls="ar-traveler" aria-selected="false" tabindex="-1">المسافر</button>
       </div>
-      <div id="ar-shopper" class="tab-content" data-lang="ar">
+      <div id="ar-shopper" class="tab-content" data-lang="ar" role="tabpanel" aria-labelledby="ar-shopper-tab" tabindex="0">
         <ol>
           <li>أنشئ طلبك (المقاس، السعر، مكان اللقاء).</li>
           <li>استقبل عروضًا من مسافرين موثوقين.</li>
           <li>اتفق وقابل المسافر لإتمام التسليم.</li>
         </ol>
       </div>
-      <div id="ar-traveler" class="tab-content" data-lang="ar">
+      <div id="ar-traveler" class="tab-content" data-lang="ar" role="tabpanel" aria-labelledby="ar-traveler-tab" tabindex="0">
         <ol>
           <li>اختر مسارك.</li>
           <li>قدّم عروضًا على الطلبات المناسبة.</li>
@@ -108,18 +295,18 @@
         </ol>
       </div>
       <!-- French tabs -->
-      <div class="tabs" data-lang="fr">
-        <button data-target="fr-shopper">Acheteur</button>
-        <button data-target="fr-traveler">Voyageur</button>
+      <div class="tabs" data-lang="fr" role="tablist" aria-label="How it works for different user types">
+        <button data-target="fr-shopper" role="tab" aria-controls="fr-shopper" aria-selected="false" tabindex="-1">Acheteur</button>
+        <button data-target="fr-traveler" role="tab" aria-controls="fr-traveler" aria-selected="false" tabindex="-1">Voyageur</button>
       </div>
-      <div id="fr-shopper" class="tab-content" data-lang="fr">
+      <div id="fr-shopper" class="tab-content" data-lang="fr" role="tabpanel" aria-labelledby="fr-shopper-tab" tabindex="0">
         <ol>
           <li>Créez votre demande (taille, budget, point de rencontre).</li>
           <li>Recevez des offres de voyageurs.</li>
           <li>Concluez et rencontrez pour la remise.</li>
         </ol>
       </div>
-      <div id="fr-traveler" class="tab-content" data-lang="fr">
+      <div id="fr-traveler" class="tab-content" data-lang="fr" role="tabpanel" aria-labelledby="fr-traveler-tab" tabindex="0">
         <ol>
           <li>Choisissez votre trajet.</li>
           <li>Proposez des offres sur les demandes pertinentes.</li>
@@ -127,18 +314,18 @@
         </ol>
       </div>
       <!-- English tabs -->
-      <div class="tabs" data-lang="en">
-        <button data-target="en-shopper">Shopper</button>
-        <button data-target="en-traveler">Traveler</button>
+      <div class="tabs" data-lang="en" role="tablist" aria-label="How it works for different user types">
+        <button data-target="en-shopper" role="tab" aria-controls="en-shopper" aria-selected="false" tabindex="-1">Shopper</button>
+        <button data-target="en-traveler" role="tab" aria-controls="en-traveler" aria-selected="false" tabindex="-1">Traveler</button>
       </div>
-      <div id="en-shopper" class="tab-content" data-lang="en">
+      <div id="en-shopper" class="tab-content" data-lang="en" role="tabpanel" aria-labelledby="en-shopper-tab" tabindex="0">
         <ol>
           <li>Create your request (size, budget, meeting point).</li>
           <li>Receive offers from trusted travellers.</li>
           <li>Agree & meet for hand‑off.</li>
         </ol>
       </div>
-      <div id="en-traveler" class="tab-content" data-lang="en">
+      <div id="en-traveler" class="tab-content" data-lang="en" role="tabpanel" aria-labelledby="en-traveler-tab" tabindex="0">
         <ol>
           <li>Pick your route.</li>
           <li>Make offers on suitable requests.</li>
@@ -270,10 +457,10 @@
         <span data-lang="en">Screenshots</span>
       </h2>
       <div class="screenshots">
-        <img src="images/home1.jpg" alt="Imzad Home – cards" />
-        <img src="images/home2.jpg" alt="Imzad Home – feature banner" />
-        <img src="images/trip.jpg" alt="Add trip form" />
-        <img src="images/request.jpg" alt="Create request form" />
+        <img src="images/home1.jpg" alt="Imzad app home screen showing request cards and traveler offers" loading="lazy" />
+        <img src="images/home2.jpg" alt="Imzad app feature banner highlighting key platform benefits" loading="lazy" />
+        <img src="images/trip.jpg" alt="Add trip form interface for travelers to create new journey listings" loading="lazy" />
+        <img src="images/request.jpg" alt="Create request form for shoppers to post item requests" loading="lazy" />
       </div>
     </section>
 
@@ -287,12 +474,12 @@
       <!-- Each FAQ item contains copies for all languages -->
       <!-- FAQ 1 -->
       <div class="faq-item" data-lang="ar fr en">
-        <div class="faq-question">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq-1-answer" id="faq-1-question">
           <span data-lang="ar">هل توفر إمزاد الدفع أو الشحن؟</span>
           <span data-lang="fr">Imzad fournit‑elle le paiement ou la livraison ?</span>
           <span data-lang="en">Does Imzad provide payment or shipping?</span>
-        </div>
-        <div class="faq-answer">
+        </button>
+        <div class="faq-answer" id="faq-1-answer" aria-labelledby="faq-1-question" role="region">
           <p>
             <span data-lang="ar">حاليًا لا. الاتفاق والدفع يتمان بين المستخدمين مباشرة.</span>
             <span data-lang="fr">Pas pour le moment. Les accords et paiements sont conclus directement entre utilisateurs.</span>
@@ -302,12 +489,12 @@
       </div>
       <!-- FAQ 2 -->
       <div class="faq-item" data-lang="ar fr en">
-        <div class="faq-question">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq-2-answer" id="faq-2-question">
           <span data-lang="ar">ما هي المواد الممنوعة؟</span>
           <span data-lang="fr">Quels articles sont interdits ?</span>
           <span data-lang="en">Which items are prohibited?</span>
-        </div>
-        <div class="faq-answer">
+        </button>
+        <div class="faq-answer" id="faq-2-answer" aria-labelledby="faq-2-question" role="region">
           <p>
             <span data-lang="ar">أي مادة محظورة بموجب القانون أو الجمارك، مثل الأسلحة، المخدرات، البضائع المقلدة، الأدوية الموصوفة، أو كميات تتجاوز الحدود.</span>
             <span data-lang="fr">Tout article prohibé par la loi ou la douane, notamment armes, drogues, contrefaçons, médicaments soumis à ordonnance ou quantités dépassant les seuils.</span>
@@ -390,11 +577,11 @@
           <span data-lang="fr">Télécharger sur Android</span>
           <span data-lang="en">Get it on Android</span>
         </a>
-        <a href="#" class="disabled">
-          <span data-lang="ar">iOS قريبًا</span>
-          <span data-lang="fr">iOS bientôt</span>
-          <span data-lang="en">iOS coming soon</span>
-        </a>
+        <button class="ios-waitlist-button" aria-label="Join iOS waitlist" type="button">
+          <span data-lang="ar">قائمة انتظار iOS</span>
+          <span data-lang="fr">Liste d'attente iOS</span>
+          <span data-lang="en">Join iOS Waitlist</span>
+        </button>
       </div>
     </section>
 
@@ -425,5 +612,6 @@
       </div>
     </footer>
     <script src="script.js"></script>
+    <script src="waitlist.js"></script>
   </body>
 </html>

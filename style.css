@@ -11,15 +11,42 @@
 
 /* Root variables for easy colour adjustments */
 :root {
+  /* Primary Brand Colors */
   --primary-color: #0b71c4; /* deep blue matching app */
+  --primary-hover: #0a5fa3; /* darker blue for hover states */
   --secondary-color: #006298; /* darker blue for accents */
+
+  /* Accent Colors */
+  --accent-orange: #ff6b35; /* warm accent for highlights */
+  --accent-green: #10b981; /* success/positive actions */
+  --accent-purple: #8b5cf6; /* premium features */
+
+  /* Neutral Colors */
   --light-bg: #ffffff;
-  --light-gray: #f7f9fc;
-  --text-color: #1f2937;
-  --muted-text: #6b7280;
-  --border-radius: 8px;
-  --transition-fast: 0.2s ease-in-out;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --light-gray: #f8fafc; /* slightly cooler gray */
+  --medium-gray: #e2e8f0; /* borders and dividers */
+  --text-color: #1e293b; /* darker, more readable */
+  --text-secondary: #475569; /* secondary text */
+  --muted-text: #64748b; /* muted text */
+
+  /* Semantic Colors */
+  --success: #059669;
+  --warning: #d97706;
+  --error: #dc2626;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+
+  /* Border and Spacing */
+  --border-radius: 12px; /* more modern rounded corners */
+  --border-radius-sm: 8px;
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Typography */
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 
 body {
@@ -27,29 +54,61 @@ body {
   padding: 0;
   background: var(--light-bg);
   color: var(--text-color);
-  line-height: 1.6;
+  line-height: 1.7;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+/* Performance optimizations */
+* {
+  box-sizing: border-box;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 header {
-  background: var(--primary-color);
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
   color: white;
-  padding: 2rem 1rem;
+  padding: 3rem 1rem 4rem;
   text-align: center;
   position: relative;
+  box-shadow: var(--shadow-lg);
 }
 
 header h1 {
-  margin: 0;
-  font-size: 2.5rem;
-  font-weight: 700;
+  margin: 0 0 1rem 0;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
 }
 
 header p {
-  margin-top: 0.5rem;
-  font-size: 1.125rem;
-  max-width: 800px;
+  margin-top: 0;
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  max-width: 700px;
   margin-left: auto;
   margin-right: auto;
+  opacity: 0.95;
+  line-height: 1.6;
 }
 
 nav.language-switcher {
@@ -58,6 +117,34 @@ nav.language-switcher {
   right: 1rem;
   display: flex;
   gap: 0.5rem;
+  z-index: 10;
+}
+
+@media (max-width: 640px) {
+  nav.language-switcher {
+    position: fixed;
+    top: auto;
+    bottom: 20px;
+    right: 20px;
+    background: white;
+    border-radius: 50px;
+    padding: 0.5rem;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--medium-gray);
+  }
+
+  nav.language-switcher button {
+    background: transparent;
+    color: var(--text-color);
+    border: 1px solid var(--medium-gray);
+  }
+
+  nav.language-switcher button.active,
+  nav.language-switcher button:hover {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+  }
 }
 
 nav.language-switcher button {
@@ -68,7 +155,14 @@ nav.language-switcher button {
   border-radius: var(--border-radius);
   cursor: pointer;
   font-size: 0.875rem;
-  transition: background var(--transition-fast);
+  transition: all var(--transition-fast);
+  min-width: 44px;
+  min-height: 44px;
+}
+
+nav.language-switcher button:focus {
+  outline: 2px solid white;
+  outline-offset: 2px;
 }
 
 nav.language-switcher button.active,
@@ -78,11 +172,28 @@ nav.language-switcher button:hover {
 }
 
 section {
-  padding: 3rem 1rem;
+  padding: 4rem 1rem;
 }
 
 section:nth-of-type(even) {
   background: var(--light-gray);
+}
+
+section h2 {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 700;
+  margin-bottom: 2rem;
+  color: var(--text-color);
+  letter-spacing: -0.025em;
+  line-height: 1.3;
+}
+
+section h3 {
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--text-color);
+  line-height: 1.4;
 }
 
 /* How it works tabs */
@@ -101,12 +212,29 @@ section:nth-of-type(even) {
   border-radius: var(--border-radius);
   cursor: pointer;
   font-weight: 600;
-  transition: background var(--transition-fast);
+  transition: all var(--transition-fast);
   /* Prevent Arabic tab labels from being truncated on small screens */
   white-space: nowrap;
+  min-height: 44px;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.tabs button:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+.tabs button:hover {
+  background: #e5e7eb;
 }
 
 .tabs button.active {
+  background: var(--primary-color);
+  color: white;
+}
+
+.tabs button[aria-selected="true"] {
   background: var(--primary-color);
   color: white;
 }
@@ -115,10 +243,27 @@ section:nth-of-type(even) {
   display: none;
   max-width: 900px;
   margin: 0 auto;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all var(--transition-smooth);
 }
 
 .tab-content.active {
   display: block;
+  opacity: 1;
+  transform: translateY(0);
+  animation: fadeInUp 0.4s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .tab-content ol {
@@ -134,17 +279,32 @@ section:nth-of-type(even) {
 }
 
 .feature-item {
-  flex: 1 1 250px;
+  flex: 1 1 280px;
   background: white;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--medium-gray);
   border-radius: var(--border-radius);
-  padding: 1.5rem;
+  padding: 2rem;
   text-align: center;
+  transition: all var(--transition-smooth);
+  box-shadow: var(--shadow-sm);
+}
+
+.feature-item:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--primary-color);
 }
 
 .feature-item h3 {
-  margin-top: 0.75rem;
-  font-size: 1.2rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  color: var(--text-color);
+}
+
+.feature-item p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
 }
 
 /* Screenshot gallery */
@@ -159,14 +319,17 @@ section:nth-of-type(even) {
 
 .screenshots img {
   width: 100%;
-  max-width: 220px;
+  max-width: 240px;
   border-radius: var(--border-radius);
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  transition: transform var(--transition-fast);
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-smooth);
+  border: 1px solid var(--medium-gray);
 }
 
 .screenshots img:hover {
-  transform: translateY(-4px);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--primary-color);
 }
 
 /* FAQ accordion */
@@ -180,11 +343,26 @@ section:nth-of-type(even) {
 }
 
 .faq-question {
+  width: 100%;
   padding: 1rem;
   background: var(--light-gray);
+  border: none;
   cursor: pointer;
   font-weight: 600;
   position: relative;
+  text-align: left;
+  font-size: inherit;
+  font-family: inherit;
+  transition: background-color var(--transition-fast);
+}
+
+.faq-question:hover {
+  background: #e5e7eb;
+}
+
+.faq-question:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
 }
 
 .faq-question::after {
@@ -203,14 +381,22 @@ section:nth-of-type(even) {
 .faq-answer {
   max-height: 0;
   overflow: hidden;
-  transition: max-height var(--transition-fast);
+  transition: all var(--transition-smooth);
   background: white;
   padding: 0 1rem;
+  opacity: 0;
 }
 
 .faq-item.open .faq-answer {
-  padding: 1rem;
-  max-height: 300px;
+  padding: 1.5rem;
+  max-height: 500px;
+  opacity: 1;
+}
+
+.faq-answer p {
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.7;
 }
 
 /* Download badges */
@@ -223,24 +409,64 @@ section:nth-of-type(even) {
 }
 
 .download-buttons a {
-  display: inline-block;
-  padding: 0.8rem 1.2rem;
-  background: var(--primary-color);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
   color: white;
   border-radius: var(--border-radius);
   text-decoration: none;
   font-weight: 600;
-  transition: background var(--transition-fast);
+  font-size: 1rem;
+  transition: all var(--transition-smooth);
+  min-height: 56px;
+  min-width: 160px;
+  text-align: center;
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+}
+
+.download-buttons a::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s;
+}
+
+.download-buttons a:hover::before {
+  left: 100%;
+}
+
+.download-buttons a:focus {
+  outline: 3px solid rgba(11, 113, 196, 0.3);
+  outline-offset: 2px;
 }
 
 .download-buttons a.disabled {
-  background: var(--light-gray);
+  background: var(--medium-gray);
   color: var(--muted-text);
-  cursor: default;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.download-buttons a.disabled::before {
+  display: none;
+}
+
+.download-buttons a.disabled:focus {
+  outline: 2px solid var(--muted-text);
+  outline-offset: 2px;
 }
 
 .download-buttons a:hover:not(.disabled) {
-  background: var(--secondary-color);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
 }
 
 footer {
@@ -261,19 +487,578 @@ footer a:hover {
   text-decoration: underline;
 }
 
-/* Responsive tweaks for tab buttons on narrow screens */
-@media (max-width: 600px) {
+/* Responsive design improvements */
+@media (max-width: 640px) {
+  body {
+    font-size: 15px;
+  }
+
+  header {
+    padding: 2rem 1rem 3rem;
+  }
+
   .tabs button {
     flex: 1 1 45%;
     text-align: center;
+    font-size: 0.875rem;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .download-buttons {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .download-buttons a {
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .features {
+    gap: 1.5rem;
+  }
+
+  .feature-item {
+    padding: 1.5rem;
+    flex: 1 1 100%;
+  }
+
+  section {
+    padding: 3rem 1rem;
+  }
+
+  .screenshots {
+    gap: 1rem;
+  }
+
+  .screenshots img {
+    max-width: 180px;
+  }
+
+  .faq-item {
+    margin: 0.25rem auto;
+  }
+
+  .faq-question {
+    padding: 0.875rem;
+    font-size: 0.95rem;
+  }
+}
+
+/* Tablet optimizations */
+@media (min-width: 641px) and (max-width: 1023px) {
+  .features {
+    gap: 2rem;
+  }
+
+  .feature-item {
+    flex: 1 1 calc(50% - 1rem);
+  }
+
+  .download-buttons a {
+    min-width: 180px;
+  }
+
+  section {
+    padding: 4rem 2rem;
   }
 }
 
 @media (min-width: 768px) {
-  header h1 {
-    font-size: 3rem;
+  .features {
+    gap: 2.5rem;
   }
-  header p {
-    font-size: 1.25rem;
+
+  .screenshots {
+    gap: 1.5rem;
   }
+}
+
+@media (min-width: 1024px) {
+  section {
+    padding: 5rem 1rem;
+  }
+
+  .features {
+    gap: 3rem;
+  }
+}
+
+/* iOS Waitlist Button Styles */
+.ios-waitlist-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, var(--accent-orange) 0%, #ff8c42 100%);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: all var(--transition-smooth);
+  min-height: 56px;
+  min-width: 160px;
+  text-align: center;
+  box-shadow: var(--shadow-md);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.ios-waitlist-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.6s ease;
+}
+
+.ios-waitlist-button:hover::before {
+  left: 100%;
+}
+
+.ios-waitlist-button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.ios-waitlist-button:focus {
+  outline: 3px solid rgba(255, 107, 53, 0.3);
+  outline-offset: 2px;
+}
+
+.ios-waitlist-button:active {
+  transform: translateY(0);
+}
+
+/* Waitlist Modal Styles */
+.waitlist-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all var(--transition-smooth);
+}
+
+.waitlist-modal.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.waitlist-modal-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(30, 41, 59, 0.8);
+  backdrop-filter: blur(4px);
+  cursor: pointer;
+}
+
+.waitlist-modal-container {
+  position: relative;
+  max-width: 480px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  transform: translateY(20px) scale(0.95);
+  transition: all var(--transition-smooth);
+}
+
+.waitlist-modal.active .waitlist-modal-container {
+  transform: translateY(0) scale(1);
+}
+
+.waitlist-modal-content {
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  border-radius: 16px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  padding: 2rem;
+  position: relative;
+}
+
+.waitlist-modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--muted-text);
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all var(--transition-fast);
+}
+
+.waitlist-modal-close:hover {
+  background: var(--medium-gray);
+  color: var(--text-color);
+}
+
+.waitlist-modal-close:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+.waitlist-modal-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.waitlist-modal-title {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 700;
+  margin: 0 0 1rem 0;
+  color: var(--text-color);
+  line-height: 1.3;
+}
+
+.waitlist-modal-subtitle {
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.6;
+}
+
+.waitlist-counter {
+  font-weight: 700;
+  color: var(--accent-orange);
+}
+
+/* Waitlist Form Styles */
+.waitlist-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.waitlist-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.waitlist-form-label {
+  font-weight: 600;
+  color: var(--text-color);
+  font-size: 0.875rem;
+}
+
+.waitlist-form-input,
+.waitlist-form-select {
+  padding: 0.875rem 1rem;
+  border: 2px solid var(--medium-gray);
+  border-radius: var(--border-radius-sm);
+  font-size: 1rem;
+  font-family: inherit;
+  transition: all var(--transition-fast);
+  background: white;
+}
+
+.waitlist-form-input:focus,
+.waitlist-form-select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(11, 113, 196, 0.1);
+}
+
+.waitlist-form-input.error,
+.waitlist-form-select.error {
+  border-color: var(--error);
+}
+
+.waitlist-form-error {
+  color: var(--error);
+  font-size: 0.875rem;
+  min-height: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.waitlist-form-error:empty {
+  display: none;
+}
+
+.waitlist-form-submit {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all var(--transition-smooth);
+  position: relative;
+  overflow: hidden;
+  min-height: 56px;
+}
+
+.waitlist-form-submit:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.waitlist-form-submit:focus {
+  outline: 3px solid rgba(11, 113, 196, 0.3);
+  outline-offset: 2px;
+}
+
+.waitlist-form-submit:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.waitlist-submit-loading {
+  display: none;
+}
+
+.waitlist-form-submit.loading .waitlist-submit-text {
+  display: none;
+}
+
+.waitlist-form-submit.loading .waitlist-submit-loading {
+  display: block;
+}
+
+.waitlist-form-privacy {
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-top: 1rem;
+}
+
+/* Contact Method Selector Styles */
+.waitlist-contact-method {
+  position: relative;
+}
+
+.waitlist-contact-divider {
+  text-align: center;
+  margin: 1rem 0;
+  position: relative;
+  display: none;
+}
+
+.waitlist-contact-divider::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--medium-gray);
+  z-index: 1;
+}
+
+.waitlist-divider-text {
+  background: white;
+  padding: 0 1rem;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  position: relative;
+  z-index: 2;
+}
+
+.waitlist-contact-toggle {
+  background: none;
+  border: none;
+  color: var(--primary-color);
+  font-size: 0.875rem;
+  cursor: pointer;
+  padding: 0.5rem 0;
+  text-decoration: underline;
+  transition: color var(--transition-fast);
+  width: 100%;
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+.waitlist-contact-toggle:hover {
+  color: var(--primary-hover);
+}
+
+.waitlist-contact-toggle:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Phone input specific styles */
+#waitlist-phone {
+  direction: ltr; /* Always LTR for phone numbers */
+  text-align: left;
+}
+
+[dir="rtl"] #waitlist-phone {
+  text-align: left; /* Override RTL for phone numbers */
+}
+
+/* Success State Styles */
+.waitlist-success {
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.waitlist-success-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.waitlist-success-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-color);
+  margin: 0 0 1rem 0;
+}
+
+.waitlist-success-message {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0 0 2rem 0;
+}
+
+.waitlist-success-social {
+  margin-top: 2rem;
+}
+
+.waitlist-success-share-text {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin: 0 0 1rem 0;
+}
+
+.waitlist-success-share-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.waitlist-share-btn {
+  background: var(--light-gray);
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-size: 1.25rem;
+}
+
+.waitlist-share-btn:hover {
+  background: var(--medium-gray);
+  transform: translateY(-2px);
+}
+
+.waitlist-share-btn:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* Mobile-specific waitlist styles */
+@media (max-width: 640px) {
+  .waitlist-modal-container {
+    width: 95%;
+    margin: 1rem;
+  }
+
+  .waitlist-modal-content {
+    padding: 1.5rem;
+  }
+
+  .waitlist-modal-title {
+    font-size: 1.5rem;
+  }
+
+  .waitlist-modal-subtitle {
+    font-size: 1rem;
+  }
+
+  .waitlist-form {
+    gap: 1.25rem;
+  }
+
+  .waitlist-form-input,
+  .waitlist-form-select {
+    padding: 1rem;
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+
+  .waitlist-success-share-buttons {
+    gap: 0.75rem;
+  }
+
+  .waitlist-share-btn {
+    width: 44px;
+    height: 44px;
+    font-size: 1.125rem;
+  }
+}
+
+/* RTL support for waitlist modal */
+[dir="rtl"] .waitlist-modal-close {
+  right: auto;
+  left: 1rem;
+}
+
+[dir="rtl"] .waitlist-form-label,
+[dir="rtl"] .waitlist-form-input,
+[dir="rtl"] .waitlist-form-select {
+  text-align: right;
+}
+
+[dir="rtl"] .waitlist-success-share-buttons {
+  direction: rtl;
+}
+
+/* Animation keyframes */
+@keyframes modalSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.ios-waitlist-button.pulse {
+  animation: pulse 2s infinite;
 }
