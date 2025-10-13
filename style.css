@@ -12,18 +12,18 @@
 /* Root variables for easy colour adjustments */
 :root {
   /* Primary Brand Colors */
-  --primary-color: #0b71c4; /* deep blue matching app */
-  --primary-hover: #0a5fa3; /* darker blue for hover states */
-  --secondary-color: #006298; /* darker blue for accents */
+  --primary-color: #0c2446; /* navy blue */
+  --primary-hover: #091b34; /* darker navy for hover states */
+  --secondary-color: #081a31; /* deep navy for accents */
 
   /* Accent Colors */
-  --accent-orange: #ff6b35; /* warm accent for highlights */
+  --accent-orange: #d4af37; /* gold for highlights */
   --accent-green: #10b981; /* success/positive actions */
   --accent-purple: #8b5cf6; /* premium features */
 
   /* Additional accents and links */
-  --accent-orange-2: #ff8c42; /* gradient end for iOS button */
-  --footer-link: #cfe8fa; /* footer link color */
+  --accent-orange-2: #c99c2b; /* gradient end for iOS button (gold darker) */
+  --footer-link: #e6f3ff; /* footer link color on navy */
 
   /* Neutral Colors */
   --light-bg: #ffffff;
@@ -174,6 +174,7 @@ nav.language-switcher button:hover {
   background: white;
   color: var(--primary-color);
 }
+
 
 section {
   padding: 4rem 1rem;
@@ -448,7 +449,7 @@ section h3 {
 }
 
 .download-buttons a:focus {
-  outline: 3px solid rgba(11, 113, 196, 0.3);
+  outline: 3px solid rgba(12, 36, 70, 0.3);
   outline-offset: 2px;
 }
 
@@ -620,7 +621,7 @@ footer a:hover {
 }
 
 .ios-waitlist-button:focus {
-  outline: 3px solid rgba(255, 107, 53, 0.3);
+  outline: 3px solid rgba(12, 36, 70, 0.3);
   outline-offset: 2px;
 }
 
@@ -769,7 +770,7 @@ footer a:hover {
 .waitlist-form-select:focus {
   outline: none;
   border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(11, 113, 196, 0.1);
+  box-shadow: 0 0 0 3px rgba(12, 36, 70, 0.1);
 }
 
 .waitlist-form-input.error,
@@ -812,7 +813,7 @@ footer a:hover {
 }
 
 .waitlist-form-submit:focus {
-  outline: 3px solid rgba(11, 113, 196, 0.3);
+  outline: 3px solid rgba(12, 36, 70, 0.3);
   outline-offset: 2px;
 }
 

@@ -1,0 +1,9 @@
+# Convex
+.env.local
+node_modules/
+.convex/
+
+# OS
+.DS_Store
+Thumbs.db
+

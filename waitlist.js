@@ -326,18 +326,19 @@ class WaitlistModal {
   }
 
   async submitToService(data) {
-    // For demo purposes, simulate API call
-    // In production, replace with actual API endpoint
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        // Simulate success with random counter increment
-        const currentCount = parseInt(this.counter.textContent.replace(/,/g, ''));
-        resolve({
-          success: true,
-          totalCount: currentCount + Math.floor(Math.random() * 5) + 1
-        });
-      }, 1500);
+    const url = "https://spotted-civet-148.convex.site/waitlistSubmit";
+    const res = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
     });
+    if (!res.ok) {
+      throw new Error(`HTTP ${res.status}`);
+    }
+    // Keep simulated counter increment locally (backend doesn't return a count)
+    const current = parseInt(this.counter.textContent.replace(/,/g, '')) || 0;
+    const increment = Math.floor(Math.random() * 5) + 1;
+    return { success: true, totalCount: current + increment };
   }
 
   showSuccess() {

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Test Waitlist API</title>
+</head>
+<body>
+  <h1>Test Waitlist Submission</h1>
+  <button onclick="testSubmit()">Test Submit</button>
+  <pre id="result"></pre>
+
+  <script>
+    async function testSubmit() {
+      const data = {
+        email: "test@example.com",
+        firstName: "Test User",
+        userType: "shopper",
+        contactMethod: "email",
+        language: "en",
+        source: "landing_page",
+        timestamp: new Date().toISOString()
+      };
+
+      try {
+        const res = await fetch("https://spotted-civet-148.convex.site/waitlistSubmit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data)
+        });
+
+        const text = await res.text();
+        document.getElementById('result').textContent =
+          `Status: ${res.status}\n` +
+          `Headers: ${JSON.stringify(Object.fromEntries(res.headers.entries()), null, 2)}\n` +
+          `Body: ${text}`;
+
+        if (text) {
+          try {
+            const json = JSON.parse(text);
+            document.getElementById('result').textContent += `\nParsed JSON: ${JSON.stringify(json, null, 2)}`;
+          } catch (e) {
+            document.getElementById('result').textContent += `\nNot valid JSON`;
+          }
+        }
+      } catch (error) {
+        document.getElementById('result').textContent =
+          `Error: ${error.message}\nStack: ${error.stack}`;
+      }
+    }
+  </script>
+</body>
+</html>
+

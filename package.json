@@ -1,0 +1,14 @@
+{
+  "name": "imzad-landing-page",
+  "version": "1.0.0",
+  "description": "Imzad landing page with Convex backend for waitlist",
+  "private": true,
+  "scripts": {
+    "dev": "convex dev",
+    "deploy": "convex deploy"
+  },
+  "devDependencies": {
+    "convex": "^1.16.0"
+  }
+}
+
