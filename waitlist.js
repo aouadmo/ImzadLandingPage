@@ -11,6 +11,9 @@ class WaitlistModal {
     this.counter = document.querySelector('.waitlist-counter');
     this.isSubmitting = false;
     this.contactMethod = 'email'; // 'email' or 'phone'
+    this.prevFocus = null;
+    this._boundKeydownHandler = null;
+    this.pageLoadTime = Date.now();
 
     this.init();
   }
@@ -79,14 +82,36 @@ class WaitlistModal {
   }
 
   open() {
+    this.prevFocus = document.activeElement;
     this.modal.classList.add('active');
     this.modal.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
-    
-    // Focus first input
+
+    // Trap focus within the modal
+    const focusable = this.modal.querySelectorAll('a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])');
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    this._boundKeydownHandler = (e) => {
+      if (e.key === 'Tab' && focusable.length) {
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    };
+    this.modal.addEventListener('keydown', this._boundKeydownHandler);
+
+    // Focus appropriate input
     setTimeout(() => {
-      document.getElementById('waitlist-email').focus();
+      const target = this.contactMethod === 'phone' ? document.getElementById('waitlist-phone') : document.getElementById('waitlist-email');
+      target && target.focus();
     }, 300);
+
+    // Session gating flag
+    try { sessionStorage.setItem('waitlist_shown', '1'); } catch (e) {}
 
     // Analytics
     this.trackEvent('waitlist_modal_open');
@@ -96,11 +121,21 @@ class WaitlistModal {
     this.modal.classList.remove('active');
     this.modal.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
-    
-    // Reset form if not submitted
-    if (!this.successDiv.style.display || this.successDiv.style.display === 'none') {
-      this.resetForm();
+
+    // Remove focus trap
+    if (this._boundKeydownHandler) {
+      this.modal.removeEventListener('keydown', this._boundKeydownHandler);
+      this._boundKeydownHandler = null;
     }
+
+    // Always reset form after close
+    this.resetForm();
+
+    // Restore focus to trigger
+    if (this.prevFocus && typeof this.prevFocus.focus === 'function') {
+      this.prevFocus.focus();
+    }
+    this.prevFocus = null;
 
     // Analytics
     this.trackEvent('waitlist_modal_close');
@@ -186,6 +221,13 @@ class WaitlistModal {
       isValid = false;
     }
 
+    // Consent validation
+    const consentEl = document.getElementById('waitlist-consent');
+    if (consentEl && !consentEl.checked) {
+      this.showError('consent', this.getErrorMessage('consent_required'));
+      isValid = false;
+    }
+
     return isValid;
   }
 
@@ -242,16 +284,23 @@ class WaitlistModal {
         errorDiv = document.getElementById('name-error');
         input = document.getElementById('waitlist-name');
         break;
+      case 'consent':
+        errorDiv = document.getElementById('consent-error');
+        input = document.getElementById('waitlist-consent');
+        break;
       default:
         return;
     }
 
-    errorDiv.textContent = message;
-    input.classList.add('error');
-    input.setAttribute('aria-invalid', 'true');
+    if (errorDiv) errorDiv.textContent = message;
+    if (input) {
+      input.classList.add('error');
+      input.setAttribute('aria-invalid', 'true');
+    }
   }
 
   clearError(input) {
+    if (!input) return;
     let errorDiv;
 
     switch(input.name) {
@@ -264,11 +313,14 @@ class WaitlistModal {
       case 'firstName':
         errorDiv = document.getElementById('name-error');
         break;
+      case 'consent':
+        errorDiv = document.getElementById('consent-error');
+        break;
       default:
         return;
     }
 
-    errorDiv.textContent = '';
+    if (errorDiv) errorDiv.textContent = '';
     input.classList.remove('error');
     input.setAttribute('aria-invalid', 'false');
   }
@@ -327,7 +379,9 @@ class WaitlistModal {
 
   updateCounter(newCount) {
     if (newCount) {
-      this.counter.textContent = newCount.toLocaleString();
+      document.querySelectorAll('.waitlist-counter').forEach(el => {
+        el.textContent = newCount.toLocaleString();
+      });
     }
   }
 
@@ -389,6 +443,7 @@ class WaitlistModal {
         phone_invalid: "Please enter a valid phone number (e.g., +213 XXX XXX XXX)",
         name_required: "Please enter your first name",
         name_too_short: "Name must be at least 2 characters",
+        consent_required: "Please consent to receive updates",
         network_error: "Something went wrong. Please try again."
       },
       fr: {
@@ -398,6 +453,7 @@ class WaitlistModal {
         phone_invalid: "Veuillez saisir un numéro valide (ex: +213 XXX XXX XXX)",
         name_required: "Veuillez saisir votre prénom",
         name_too_short: "Le nom doit contenir au moins 2 caractères",
+        consent_required: "Veuillez donner votre consentement pour recevoir des mises à jour",
         network_error: "Une erreur s'est produite. Réessayez."
       },
       ar: {
@@ -407,6 +463,7 @@ class WaitlistModal {
         phone_invalid: "يرجى إدخال رقم صحيح (مثال: +213 XXX XXX XXX)",
         name_required: "يرجى إدخال اسمك الأول",
         name_too_short: "يجب أن يكون الاسم على الأقل حرفين",
+        consent_required: "يرجى الموافقة على تلقي التحديثات",
         network_error: "حدث خطأ. يرجى المحاولة مرة أخرى."
       }
     };
@@ -438,6 +495,10 @@ class WaitlistModal {
       // Focus phone input
       setTimeout(() => document.getElementById('waitlist-phone').focus(), 100);
 
+      // Clear any stale errors
+      this.clearError(document.getElementById('waitlist-email'));
+      this.clearError(document.getElementById('waitlist-phone'));
+
       this.trackEvent('contact_method_switch', { to: 'phone' });
     } else {
       // Switch to email
@@ -457,6 +518,10 @@ class WaitlistModal {
 
       // Focus email input
       setTimeout(() => document.getElementById('waitlist-email').focus(), 100);
+
+      // Clear any stale errors
+      this.clearError(document.getElementById('waitlist-email'));
+      this.clearError(document.getElementById('waitlist-phone'));
 
       this.trackEvent('contact_method_switch', { to: 'email' });
     }
@@ -485,7 +550,9 @@ class WaitlistModal {
     // Desktop exit intent
     if (window.innerWidth >= 768) {
       document.addEventListener('mouseleave', (e) => {
-        if (e.clientY <= 0 && !hasTriggered && !this.modal.classList.contains('active')) {
+        const dwellOk = (Date.now() - this.pageLoadTime) > 25000; // 25s dwell
+        const notShown = !sessionStorage.getItem('waitlist_shown');
+        if (e.clientY <= 0 && !hasTriggered && !this.modal.classList.contains('active') && dwellOk && notShown) {
           hasTriggered = true;
           setTimeout(() => {
             this.open();
@@ -503,8 +570,10 @@ class WaitlistModal {
     if (window.innerWidth < 768) {
       window.addEventListener('scroll', () => {
         const scrollPercent = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+        const dwellOk = (Date.now() - this.pageLoadTime) > 20000; // 20s dwell
+        const notShown = !sessionStorage.getItem('waitlist_shown');
 
-        if (scrollPercent > 70 && !hasTriggered && !this.modal.classList.contains('active')) {
+        if (scrollPercent > 70 && !hasTriggered && !this.modal.classList.contains('active') && dwellOk && notShown) {
           hasTriggered = true;
           setTimeout(() => {
             this.open();

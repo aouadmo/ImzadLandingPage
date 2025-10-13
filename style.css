@@ -21,6 +21,10 @@
   --accent-green: #10b981; /* success/positive actions */
   --accent-purple: #8b5cf6; /* premium features */
 
+  /* Additional accents and links */
+  --accent-orange-2: #ff8c42; /* gradient end for iOS button */
+  --footer-link: #cfe8fa; /* footer link color */
+
   /* Neutral Colors */
   --light-bg: #ffffff;
   --light-gray: #f8fafc; /* slightly cooler gray */
@@ -226,7 +230,7 @@ section h3 {
 }
 
 .tabs button:hover {
-  background: #e5e7eb;
+  background: var(--medium-gray);
 }
 
 .tabs button.active {
@@ -336,7 +340,7 @@ section h3 {
 .faq-item {
   max-width: 800px;
   margin: 0.5rem auto;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--medium-gray);
   border-radius: var(--border-radius);
   overflow: hidden;
   background: white;
@@ -357,7 +361,7 @@ section h3 {
 }
 
 .faq-question:hover {
-  background: #e5e7eb;
+  background: var(--medium-gray);
 }
 
 .faq-question:focus {
@@ -448,21 +452,7 @@ section h3 {
   outline-offset: 2px;
 }
 
-.download-buttons a.disabled {
-  background: var(--medium-gray);
-  color: var(--muted-text);
-  cursor: not-allowed;
-  box-shadow: none;
-}
 
-.download-buttons a.disabled::before {
-  display: none;
-}
-
-.download-buttons a.disabled:focus {
-  outline: 2px solid var(--muted-text);
-  outline-offset: 2px;
-}
 
 .download-buttons a:hover:not(.disabled) {
   transform: translateY(-2px);
@@ -478,7 +468,7 @@ footer {
 }
 
 footer a {
-  color: #cfe8fa;
+  color: var(--footer-link);
   text-decoration: none;
   margin: 0 0.5rem;
 }
@@ -591,7 +581,7 @@ footer a:hover {
   align-items: center;
   justify-content: center;
   padding: 1rem 2rem;
-  background: linear-gradient(135deg, var(--accent-orange) 0%, #ff8c42 100%);
+  background: linear-gradient(135deg, var(--accent-orange) 0%, var(--accent-orange-2) 100%);
   color: white;
   border: none;
   border-radius: var(--border-radius);
@@ -918,7 +908,18 @@ footer a:hover {
 }
 
 /* Success State Styles */
+/* Utilities */
+.text-center { text-align: center; }
+.mt-6 { margin-top: 1.5rem; }
+.mt-2 { margin-top: 0.5rem; }
+.note-small { font-size: 0.875rem; font-weight: 500; }
+.max-w-900 { max-width: 900px; margin: 0 auto; }
+
+/* Defaults for toggled elements */
+#phone-group { display: none; }
+
 .waitlist-success {
+  display: none;
   text-align: center;
   padding: 2rem 0;
 }

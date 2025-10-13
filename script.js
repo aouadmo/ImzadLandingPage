@@ -59,8 +59,9 @@ document.addEventListener('DOMContentLoaded', () => {
         // Set dir attribute on html for RTL when Arabic is selected
         htmlElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
 
-        // Update form placeholders
+        // Update form placeholders and select option labels
         updateFormPlaceholders(lang);
+        updateSelectLabels(lang);
 
         // Restore opacity
         bodyElement.style.opacity = '1';
@@ -73,20 +74,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function updateFormPlaceholders(lang) {
     const placeholders = {
-      en: { email: 'your@email.com', name: 'Your first name' },
-      fr: { email: 'votre@email.com', name: 'Votre prénom' },
-      ar: { email: 'your@email.com', name: 'اسمك الأول' }
+      en: { email: 'your@email.com', phone: '+213 5X XX XX XX', name: 'Your first name' },
+      fr: { email: 'votre@email.com', phone: '+213 5X XX XX XX', name: 'Votre prénom' },
+      ar: { email: 'your@email.com', phone: '+213 5X XX XX XX', name: 'اسمك الأول' }
     };
 
     const emailInput = document.getElementById('waitlist-email');
+    const phoneInput = document.getElementById('waitlist-phone');
     const nameInput = document.getElementById('waitlist-name');
 
     if (emailInput && placeholders[lang]) {
       emailInput.placeholder = placeholders[lang].email;
     }
+    if (phoneInput && placeholders[lang]) {
+      phoneInput.placeholder = placeholders[lang].phone;
+    }
     if (nameInput && placeholders[lang]) {
       nameInput.placeholder = placeholders[lang].name;
     }
+  }
+
+  function updateSelectLabels(lang) {
+    const select = document.getElementById('waitlist-type');
+    if (!select) return;
+    Array.from(select.options).forEach(opt => {
+      const label = opt.getAttribute(`data-label-${lang}`);
+      if (label) opt.textContent = label;
+    });
   }
 
   function announceLanguageChange(lang) {

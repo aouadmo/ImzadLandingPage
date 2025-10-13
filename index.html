@@ -37,7 +37,7 @@
   <body>
     <!-- Hero Section -->
     <!-- iOS Waitlist Modal -->
-    <div id="waitlist-modal" class="waitlist-modal" role="dialog" aria-labelledby="waitlist-title" aria-describedby="waitlist-description" aria-hidden="true">
+    <div id="waitlist-modal" class="waitlist-modal" role="dialog" aria-modal="true" aria-labelledby="waitlist-title" aria-describedby="waitlist-description" aria-hidden="true">
       <div class="waitlist-modal-backdrop" aria-hidden="true"></div>
       <div class="waitlist-modal-container">
         <div class="waitlist-modal-content">
@@ -86,7 +86,7 @@
                 </span>
               </div>
 
-              <div class="waitlist-form-group" id="phone-group" style="display: none;">
+              <div class="waitlist-form-group" id="phone-group">
                 <label for="waitlist-phone" class="waitlist-form-label">
                   <span data-lang="en">Phone Number (WhatsApp)</span>
                   <span data-lang="fr">Numéro de téléphone (WhatsApp)</span>
@@ -136,26 +136,10 @@
                 <span data-lang="ar">أنا مهتم كـ:</span>
               </label>
               <select id="waitlist-type" name="userType" class="waitlist-form-select">
-                <option value="">
-                  <span data-lang="en">Select an option</span>
-                  <span data-lang="fr">Sélectionnez une option</span>
-                  <span data-lang="ar">اختر خياراً</span>
-                </option>
-                <option value="shopper">
-                  <span data-lang="en">Shopper</span>
-                  <span data-lang="fr">Acheteur</span>
-                  <span data-lang="ar">مشتري</span>
-                </option>
-                <option value="traveler">
-                  <span data-lang="en">Traveler</span>
-                  <span data-lang="fr">Voyageur</span>
-                  <span data-lang="ar">مسافر</span>
-                </option>
-                <option value="both">
-                  <span data-lang="en">Both</span>
-                  <span data-lang="fr">Les deux</span>
-                  <span data-lang="ar">كلاهما</span>
-                </option>
+                <option value="" data-label-en="Select an option" data-label-fr="Sélectionnez une option" data-label-ar="اختر خياراً">Select an option</option>
+                <option value="shopper" data-label-en="Shopper" data-label-fr="Acheteur" data-label-ar="مشتري">Shopper</option>
+                <option value="traveler" data-label-en="Traveler" data-label-fr="Voyageur" data-label-ar="مسافر">Traveler</option>
+                <option value="both" data-label-en="Both" data-label-fr="Les deux" data-label-ar="كلاهما">Both</option>
               </select>
             </div>
 
@@ -174,12 +158,22 @@
 
             <div class="waitlist-form-privacy">
               <span data-lang="en">🔒 We respect your privacy. Unsubscribe anytime.</span>
+              <div class="waitlist-form-group waitlist-consent-group">
+                <label class="waitlist-consent">
+                  <input type="checkbox" id="waitlist-consent" name="consent" required>
+                  <span data-lang="en">I agree to receive updates about the iOS launch and accept the <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a>.</span>
+                  <span data-lang="fr">J'accepte de recevoir des informations sur le lancement iOS et j'accepte la <a href="privacy.html" target="_blank" rel="noopener">Politique de confidentialité</a>.</span>
+                  <span data-lang="ar">أوافق على تلقي التحديثات حول إطلاق iOS وأوافق على <a href="privacy.html" target="_blank" rel="noopener">سياسة الخصوصية</a>.</span>
+                </label>
+                <div class="waitlist-form-error" id="consent-error" role="alert" aria-live="polite"></div>
+              </div>
+
               <span data-lang="fr">🔒 Nous respectons votre vie privée. Désabonnement à tout moment.</span>
               <span data-lang="ar">🔒 نحترم خصوصيتك. إلغاء الاشتراك في أي وقت.</span>
             </div>
           </form>
 
-          <div id="waitlist-success" class="waitlist-success" style="display: none;">
+          <div id="waitlist-success" class="waitlist-success">
             <div class="waitlist-success-icon">🎉</div>
             <h3 class="waitlist-success-title">
               <span data-lang="en">You're in!</span>
@@ -251,7 +245,7 @@
           <span data-lang="en">Join iOS Waitlist</span>
         </button>
       </div>
-      <p style="margin-top:1.5rem;font-size:0.875rem;font-weight:500;">
+      <p class="note-small mt-6">
         <span data-lang="ar"
           >إمزاد وسيط ربط فقط — الاتفاقات والدفع بين المستخدمين مباشرة مع
           احترام القوانين والجمارك.</span
@@ -269,7 +263,7 @@
 
     <!-- How It Works Section -->
     <section id="how-it-works">
-      <h2 style="text-align:center;">
+      <h2 class="text-center">
         <span data-lang="ar">كيف تعمل؟</span>
         <span data-lang="fr">Comment ça marche ?</span>
         <span data-lang="en">How it works</span>
@@ -336,7 +330,7 @@
 
     <!-- Key Features Section -->
     <section id="features">
-      <h2 style="text-align:center;">
+      <h2 class="text-center">
         <span data-lang="ar">ميزات رئيسية</span>
         <span data-lang="fr">Fonctionnalités clés</span>
         <span data-lang="en">Key features</span>
@@ -419,12 +413,12 @@
 
     <!-- Trust & Safety Section -->
     <section id="trust">
-      <h2 style="text-align:center;">
+      <h2 class="text-center">
         <span data-lang="ar">الثقة والسلامة</span>
         <span data-lang="fr">Confiance & sécurité</span>
         <span data-lang="en">Trust & Safety</span>
       </h2>
-      <p style="max-width:900px;margin:0 auto;">
+      <p class="max-w-900">
         <span data-lang="ar"
           >إمزاد هو وسيط فقط — لا يوفر خدمات شحن أو دفع. الاتفاقات والتسديدات تتم
           بين المستخدمين مباشرة. تأكد من احترام القانون الجزائري للاتجار
@@ -451,7 +445,7 @@
 
     <!-- Screenshots Section -->
     <section id="screenshots">
-      <h2 style="text-align:center;">
+      <h2 class="text-center">
         <span data-lang="ar">صور من التطبيق</span>
         <span data-lang="fr">Captures d’écran</span>
         <span data-lang="en">Screenshots</span>
@@ -466,7 +460,7 @@
 
     <!-- FAQ Section -->
     <section id="faq">
-      <h2 style="text-align:center;">
+      <h2 class="text-center">
         <span data-lang="ar">الأسئلة الشائعة</span>
         <span data-lang="fr">FAQ</span>
         <span data-lang="en">FAQ</span>
@@ -566,7 +560,7 @@
 
     <!-- Download Section (repeated call to action) -->
     <section id="download">
-      <h2 style="text-align:center;">
+      <h2 class="text-center">
         <span data-lang="ar">احصل على إمزاد الآن</span>
         <span data-lang="fr">Téléchargez Imzad maintenant</span>
         <span data-lang="en">Get Imzad now</span>
@@ -606,7 +600,7 @@
           <span data-lang="en">Contact</span>
         </a>
       </div>
-      <div style="margin-top:0.5rem;">
+      <div class="mt-2">
         <!-- Wrap copyright text in LTR span to preserve word order in RTL mode -->
         <span dir="ltr">© 2025 Imzad. All rights reserved.</span>
       </div>
