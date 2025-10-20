@@ -30,6 +30,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const langElements = document.querySelectorAll('[data-lang]');
 
   function setLanguage(lang) {
+    // Save language preference to localStorage for persistence across pages
+    localStorage.setItem('imzad-language', lang);
+
     // Add fade transition class to body
     bodyElement.style.transition = 'opacity 0.2s ease-in-out';
     bodyElement.style.opacity = '0.7';
@@ -113,11 +116,16 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => bodyElement.removeChild(announcement), 1000);
   }
 
-  // default to Arabic so Arabic content appears when the page loads
-  setLanguage('ar');
-  const defaultLangBtn = document.querySelector('nav.language-switcher button[data-lang="ar"]');
-  defaultLangBtn.classList.add('active');
-  defaultLangBtn.setAttribute('aria-pressed', 'true');
+  // Initialize language from localStorage or default to English
+  const savedLanguage = localStorage.getItem('imzad-language') || 'en';
+  setLanguage(savedLanguage);
+
+  // Set the active state on the correct language button
+  const activeLangBtn = document.querySelector(`nav.language-switcher button[data-lang="${savedLanguage}"]`);
+  if (activeLangBtn) {
+    activeLangBtn.classList.add('active');
+    activeLangBtn.setAttribute('aria-pressed', 'true');
+  }
 
   // Tabs for how it works section
   const tabContainers = document.querySelectorAll('.tabs');

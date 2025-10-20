@@ -93,5 +93,55 @@ http.route({
   })
 });
 
+// GET endpoint to fetch waitlist count
+http.route({
+  path: "/waitlistCount",
+  method: "GET",
+  handler: httpAction(async (ctx, req) => {
+    const origin = getAllowedOrigin(req.headers.get("Origin"));
+
+    try {
+      const count = await ctx.runQuery(api.waitlist.count);
+
+      return new Response(JSON.stringify({ count }), {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": origin,
+          "Vary": "Origin",
+          "Cache-Control": "public, max-age=60" // Cache for 1 minute
+        }
+      });
+    } catch (e: any) {
+      return new Response(JSON.stringify({ count: 0, error: e.message }), {
+        status: 500,
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": origin,
+          "Vary": "Origin"
+        }
+      });
+    }
+  })
+});
+
+// Handle CORS preflight for count endpoint
+http.route({
+  path: "/waitlistCount",
+  method: "OPTIONS",
+  handler: httpAction(async (_, req) => {
+    const origin = getAllowedOrigin(req.headers.get("Origin"));
+
+    return new Response(null, {
+      status: 204,
+      headers: {
+        "Access-Control-Allow-Origin": origin,
+        "Access-Control-Allow-Methods": "GET, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type",
+        "Vary": "Origin"
+      }
+    });
+  })
+});
+
 export default http;
 

@@ -20,7 +20,7 @@ class WaitlistModal {
 
   init() {
     this.bindEvents();
-    this.updateCounter();
+    this.fetchAndUpdateCounter(); // Fetch real count from backend
     this.addPulseAnimation();
     this.setupExitIntent();
     this.setupScrollTrigger();
@@ -326,7 +326,7 @@ class WaitlistModal {
   }
 
   async submitToService(data) {
-    const url = "https://spotted-civet-148.convex.site/waitlistSubmit";
+    const url = "https://reminiscent-finch-237.convex.site/waitlistSubmit";
     const res = await fetch(url, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -335,10 +335,12 @@ class WaitlistModal {
     if (!res.ok) {
       throw new Error(`HTTP ${res.status}`);
     }
-    // Keep simulated counter increment locally (backend doesn't return a count)
-    const current = parseInt(this.counter.textContent.replace(/,/g, '')) || 0;
-    const increment = Math.floor(Math.random() * 5) + 1;
-    return { success: true, totalCount: current + increment };
+
+    // Fetch the updated real count after successful submission
+    const countRes = await fetch("https://reminiscent-finch-237.convex.site/waitlistCount");
+    const countData = await countRes.json();
+
+    return { success: true, totalCount: countData.count };
   }
 
   showSuccess() {
@@ -383,6 +385,19 @@ class WaitlistModal {
       document.querySelectorAll('.waitlist-counter').forEach(el => {
         el.textContent = newCount.toLocaleString();
       });
+    }
+  }
+
+  async fetchAndUpdateCounter() {
+    try {
+      const res = await fetch("https://reminiscent-finch-237.convex.site/waitlistCount");
+      if (res.ok) {
+        const data = await res.json();
+        this.updateCounter(data.count);
+      }
+    } catch (error) {
+      console.error('Failed to fetch waitlist count:', error);
+      // Keep the default hard-coded value if fetch fails
     }
   }
 

@@ -12,9 +12,9 @@
 /* Root variables for easy colour adjustments */
 :root {
   /* Primary Brand Colors */
-  --primary-color: #0c2446; /* navy blue */
-  --primary-hover: #091b34; /* darker navy for hover states */
-  --secondary-color: #081a31; /* deep navy for accents */
+  --primary-color: #0F3B9C; /* new blue */
+  --primary-hover: #0C2E7A; /* darker blue for hover states */
+  --secondary-color: #0A2560; /* deep blue for accents */
 
   /* Accent Colors */
   --accent-orange: #d4af37; /* gold for highlights */
@@ -770,7 +770,7 @@ footer a:hover {
 .waitlist-form-select:focus {
   outline: none;
   border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(12, 36, 70, 0.1);
+  box-shadow: 0 0 0 3px rgba(15, 59, 156, 0.1);
 }
 
 .waitlist-form-input.error,
